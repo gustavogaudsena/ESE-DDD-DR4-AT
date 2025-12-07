@@ -5,6 +5,7 @@ import java.util.Map;
 
 public record PedidoEnviado(
         Long pedidoId,
+        Long customerId,
         Map<Long, Integer> itensPedidos,
         Instant ts
 ) {}

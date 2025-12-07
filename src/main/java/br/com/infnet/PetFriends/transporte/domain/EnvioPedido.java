@@ -26,18 +26,9 @@ public class EnvioPedido {
 
     public EnvioPedido(Long pedidoId, Endereco enderecoEntrega) {
         this.pedidoId = pedidoId;
-        this.status = EnvioPedidoStatus.SOLICITADO;
+        this.status = EnvioPedidoStatus.EM_TRANSITO;
         this.criadoEm = new Date();
         this.enderecoEntrega = enderecoEntrega;
-    }
-
-    public void enviarPedido() {
-        if (status != EnvioPedidoStatus.SOLICITADO) {
-            throw new IllegalStateException("Não é possível enviar um pedido que não está solicitado.");
-        }
-
-        this.status = EnvioPedidoStatus.EM_TRANSITO;
-        this.atualizadoEm = new Date();
     }
 
     public void entregarPedido() {

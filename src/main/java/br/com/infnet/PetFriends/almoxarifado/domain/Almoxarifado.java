@@ -2,12 +2,14 @@ package br.com.infnet.PetFriends.almoxarifado.domain;
 
 import br.com.infnet.PetFriends.almoxarifado.infra.LocalizacaoConverter;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
 @Table(name = "almoxarifado")
+@Getter
 public class Almoxarifado {
 
     @Id
@@ -24,7 +26,7 @@ public class Almoxarifado {
     @Convert(converter = LocalizacaoConverter.class)
     private Localizacao localizacao;
 
-    protected Almoxarifado() {
+    public Almoxarifado() {
     }
 
     public Almoxarifado(String nome, Localizacao localizacao) {

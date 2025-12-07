@@ -1,15 +1,20 @@
 spring:
   application:
-    name: PetFriends
+    name: PetFriends_Almoxarifado
   cloud:
     function:
       definition: pedidoEnviado
     stream:
       default-binder: pubsub
       bindings:
-        pedidoEnviado-out-0:
+        depacharPedido-out-0:
+          destination: PetFriends_Almoxarifado
+        cancelarPedido-out-0:
+          destination: PetFriends_Almoxarifado
+        pedidoEnviado-in-0:
           destination: PetFriends_Pedidos
     gcp:
       project-id: softwares-escalaveis
       credentials:
         location: <SUAS_CREDENCIAIS>
+
