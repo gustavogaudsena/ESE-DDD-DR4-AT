@@ -1,5 +1,6 @@
 package br.com.infnet.PetFriends.almoxarifado.domain;
 
+import br.com.infnet.PetFriends.almoxarifado.infra.LocalizacaoConverter;
 import jakarta.persistence.*;
 
 import java.util.HashMap;
@@ -12,16 +13,15 @@ public class Almoxarifado {
     @Id
     @GeneratedValue
     private Long id;
-
     private String nome;
 
     @ElementCollection
     @CollectionTable(name = "estoque")
     @MapKeyColumn(name = "produto_id")
     @Column(name = "quantidade")
-    private Map<ProdutoId, Integer> estoque = new HashMap<>();
+    private Map<Long, Integer> estoque = new HashMap<>();
 
-    @Embedded
+    @Convert(converter = LocalizacaoConverter.class)
     private Localizacao localizacao;
 
     protected Almoxarifado() {
@@ -32,15 +32,15 @@ public class Almoxarifado {
         this.localizacao = localizacao;
     }
 
-    public void prepararItens(Map<ProdutoId, Integer> itensPedido) {
+    public void prepararItens(Map<Long, Integer> itensPedido) {
         itensPedido.forEach(this::baixarEstoque);
     }
 
-    private void baixarEstoque(ProdutoId produtoId, Integer quantidade) {
+    private void baixarEstoque(Long produtoId, Integer quantidade) {
         int quantidadeEmEstoque = estoque.getOrDefault(produtoId, 0);
 
         if (quantidade > quantidadeEmEstoque)
-            throw new EstoqueInsuficiente("Estoque insuficiente. ProdutoId: " + produtoId.getValue() + " Quantidade: " + quantidade);
+            throw new EstoqueInsuficiente("Estoque insuficiente. ProdutoId: " + produtoId + " Quantidade: " + quantidade);
 
         estoque.put(produtoId, quantidadeEmEstoque - quantidade);
     }

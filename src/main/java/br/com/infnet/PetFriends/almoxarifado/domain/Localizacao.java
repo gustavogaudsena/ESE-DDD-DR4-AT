@@ -5,16 +5,16 @@ import jakarta.persistence.Embeddable;
 
 import java.util.Objects;
 
-@Embeddable
+
 public class Localizacao {
 
-    private double latitude;
     private double longitude;
+    private double latitude;
 
     protected Localizacao() {
     }
 
-    public Localizacao(double latitude, double longitude) {
+    public Localizacao(double longitude, double latitude) {
         if (latitude < -90 || latitude > 90) throw new IllegalArgumentException("Latitude inválida");
         if (longitude < -180 || longitude > 180) throw new IllegalArgumentException("Longitude inválida");
         this.latitude = latitude;
@@ -32,7 +32,14 @@ public class Localizacao {
 
     @Override
     public int hashCode() {
-        return Objects.hash(latitude, longitude);
+        return Objects.hash(longitude, latitude);
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }
