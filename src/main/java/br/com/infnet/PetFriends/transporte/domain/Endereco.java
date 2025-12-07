@@ -24,8 +24,9 @@ public class Endereco {
         if (bairro == null || bairro.isBlank()) throw new IllegalArgumentException("Bairro obrigatório");
         if (cidade == null || cidade.isBlank()) throw new IllegalArgumentException("Cidade obrigatória");
         if (estado == null || estado.isBlank()) throw new IllegalArgumentException("Estado obrigatória");
-        if (numero == null || numero <= 0)  throw new IllegalArgumentException("Número inválido");
-        if (cep.matches("\\d{5}-\\d{3}")) throw new IllegalArgumentException("CEP inválido (use formato 00000-000)");
+        if (numero == null || numero <= 0) throw new IllegalArgumentException("Número inválido");
+        if (cep == null || !cep.matches("\\d{5}-\\d{3}"))
+            throw new IllegalArgumentException("CEP inválido (Formato 00000-000)");
 
         this.rua = rua;
         this.bairro = bairro;

@@ -1,17 +1,16 @@
 spring:
   application:
-    name: PetFriends
+    name: PetFriends_Transporte
   cloud:
     function:
-      definition: pedidoEnviado
+      definition: pedidoDespachado
     stream:
       default-binder: pubsub
       bindings:
-        pedidoEnviado-out-0:
-          destination: PetFriends_Pedidos
-        pedidoDespachado-out-0:
+        pedidoDespachado-in-0:
           destination: PetFriends_Pedidos
     gcp:
       project-id: softwares-escalaveis
       credentials:
         location: <SUAS_CREDENCIAIS>
+

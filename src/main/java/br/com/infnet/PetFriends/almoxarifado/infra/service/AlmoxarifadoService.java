@@ -5,6 +5,7 @@ import br.com.infnet.PetFriends.almoxarifado.domain.EstoqueInsuficiente;
 import br.com.infnet.PetFriends.almoxarifado.events.CancelarPedido;
 import br.com.infnet.PetFriends.almoxarifado.events.DespacharPedido;
 import br.com.infnet.PetFriends.almoxarifado.infra.AlmoxarifadoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class AlmoxarifadoService {
     private transient StreamBridge streamBridge;
 
 
+    @Transactional
     public void prepararPedido(Long pedidoId, Long customerId, Map<Long, Integer> itensPedido) {
 
         try {
@@ -40,7 +42,7 @@ public class AlmoxarifadoService {
     }
 
     private Almoxarifado localizarAlmoxarifadoMaisProximo(Long customerId) {
-        // Localiza o almoxarifado mais próximo com base no endereço do cliente.
+        // Localiza o almoxarifado mais próximo com base no endereço do cliente em PetFriends_Clientes.
 
         return new Almoxarifado();
     }

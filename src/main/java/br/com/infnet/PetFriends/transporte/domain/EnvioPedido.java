@@ -24,7 +24,7 @@ public class EnvioPedido {
     public EnvioPedido() {
     }
 
-    public EnvioPedido(Long pedidoId, Endereco enderecoEntrega) {
+    public EnvioPedido(Long pedidoId, Long customerId, Endereco enderecoEntrega) {
         this.pedidoId = pedidoId;
         this.status = EnvioPedidoStatus.EM_TRANSITO;
         this.criadoEm = new Date();
